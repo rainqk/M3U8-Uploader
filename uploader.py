@@ -204,7 +204,7 @@ class Down:
             "iv": b"",
             "ts": [],
         }
-        self.upload_s3 = [upload1, upload2, upload3, upload4, upload5, upload6]
+        self.upload_s3 = [upload1, upload2, upload3, upload4, upload5, upload6, upload7]
 
     def load_m3u8(self, url=None):
         m3u8link = url or self.vinfo["m3u8link"]
