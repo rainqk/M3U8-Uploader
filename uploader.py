@@ -173,6 +173,27 @@ def upload6(filename, fdata):
     raise Exception(f"{filename} TS 上传失败")
 
 
+def upload7(filename, fdata):
+    file = prefix + fdata
+    data = {
+        'file': (filename, file, "image/*")
+    }
+    headers = {
+        'accept': 'application/json, text/plain, */*',
+        'origin': 'https://mofang-m-pub.ddxq.mobi',
+        "Accept-Language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+    }
+    for i in range(3):
+        try:
+            with requests.post(f'https://pubgw.api.ddxq.mobi/solar-mform-service/file/v1/public/upload', headers=headers, data=data) as resp:
+                return resp.json()["data"]["url"]
+        except Exception as e:
+            logger.warning(f"上传TS请求出错 {e}")
+            time.sleep(2)
+    raise Exception(f"{filename} TS 上传失败")
+    
+
 class Down:
     def __init__(self, filename=None, m3u8link=None):
         self.session = requests.session()
